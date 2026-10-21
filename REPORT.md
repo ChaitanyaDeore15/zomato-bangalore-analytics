@@ -2,14 +2,11 @@
 
 ---
 
-**Academic Project Report**  
-**Course:** Big Data Analytics  
-**Activity:** FA2 Problem-Based Solving Activity  
-**Student Name:** Himanshu Poddar  
-**Dataset:** Zomato Bangalore Restaurants Dataset (Kaggle / College Repository)  
+**Analytical Project Report**  
+**Dataset:** Zomato Bangalore Restaurants Dataset (~547 MB, 51,717 raw listings)  
 **Core Technologies:** Apache Spark (PySpark), Python 3.10, Matplotlib, Seaborn, Plotly, Streamlit, PyTest  
-**Syllabus Focus:** Unit 3 (Apache Spark Frameworks) & Unit 4 (Visualization Techniques for Big Data)  
-**Date of Submission:** October 2026  
+**Frameworks Covered:** Apache Spark Core & DataFrames, Big Data Visual Analytics  
+**Date:** October 2026  
 
 ---
 
@@ -259,7 +256,7 @@ To demonstrate foundational concepts from Unit 3, the cleaning and analytical en
 
 ## 12. Conclusion
 
-This project successfully implemented an end-to-end Big Data Analytics workflow on the Zomato Bangalore Restaurants dataset using Apache Spark and modern data visualization frameworks. By combining Spark Core RDD transformations, DataFrame Catalyst optimizations, and advanced visual analytics, we answered all required business questions and uncovered significant structural patterns in Bangalore's restaurant landscape. The complete reproducibility of the codebase—validated via automated tests and an interactive dashboard—ensures compliance with the academic and practical standards of the FA2 evaluation rubric.
+This project successfully implemented an end-to-end Big Data Analytics workflow on the Zomato Bangalore Restaurants dataset using Apache Spark and modern data visualization frameworks. By combining Spark Core RDD transformations, DataFrame Catalyst optimizations, and advanced visual analytics, we answered all required business questions and uncovered significant structural patterns in Bangalore's restaurant landscape. The complete reproducibility of the codebase—validated via automated tests and an interactive dashboard—ensures compliance with rigorous academic and professional data engineering standards.
 
 ---
 

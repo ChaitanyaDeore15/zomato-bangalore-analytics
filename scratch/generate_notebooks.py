@@ -16,8 +16,6 @@ def create_notebook_1():
     nb.cells = [
         nbf.v4.new_markdown_cell(
             "# 01. Dataset Exploration: Zomato Bangalore Restaurants\n"
-            "**Subject:** Big Data Analytics (FA2 Activity)  \n"
-            "**Student:** Himanshu Poddar  \n"
             "**Objective:** Inspect raw dataset schema, identify data quality anomalies, missing values, "
             "and duplicate records before applying Apache Spark distributed processing."
         ),
@@ -107,9 +105,7 @@ def create_notebook_2():
     nb.cells = [
         nbf.v4.new_markdown_cell(
             "# 02. PySpark Data Processing & Spark Frameworks\n"
-            "**Subject:** Big Data Analytics (Unit 3 Coverage)  \n"
-            "**Student:** Himanshu Poddar  \n"
-            "**Syllabus Coverage:**\n"
+            "**Core Frameworks & Architecture:**\n"
             "- Spark Core & SparkSession architecture\n"
             "- Resilient Distributed Datasets (RDDs): Transformations (`map`, `filter`, `flatMap`, `reduceByKey`) & Actions (`count`, `take`)\n"
             "- Spark DataFrame API operations (`select`, `filter`, `withColumn`, `groupBy`, `agg`, `orderBy`, `dropDuplicates`)\n"
@@ -214,8 +210,6 @@ def create_notebook_3():
     nb.cells = [
         nbf.v4.new_markdown_cell(
             "# 03. Big Data Analysis: Answering Core Business Questions\n"
-            "**Subject:** Big Data Analytics (FA2 Activity)  \n"
-            "**Student:** Himanshu Poddar  \n"
             "**Objective:** Answer all 13 required business and market questions using genuine PySpark aggregations."
         ),
         nbf.v4.new_markdown_cell("## Setup & Spark Initialization"),
@@ -312,9 +306,7 @@ def create_notebook_4():
     nb.cells = [
         nbf.v4.new_markdown_cell(
             "# 04. Big Data Visualization & Interpretation\n"
-            "**Subject:** Big Data Analytics (Unit 4 Coverage)  \n"
-            "**Student:** Himanshu Poddar  \n"
-            "**Syllabus Coverage:**\n"
+            "**Topics Covered:**\n"
             "- Visualization techniques and tools for Big Data\n"
             "- Geospatial and spatial concentration visualization\n"
             "- Heatmaps and high-dimensional cross-tabulations\n"

@@ -1,7 +1,5 @@
-# Academic Viva Preparation: Zomato Bangalore Restaurant Analytics
-**Subject:** Big Data Analytics (FA2 Activity)  
-**Student Name:** Himanshu Poddar  
-**Coverage:** Unit 3 (Apache Spark Frameworks) & Unit 4 (Visualization Techniques for Big Data)
+# Technical Viva & Interview Preparation: Zomato Bangalore Restaurant Analytics
+**Topics Covered:** Apache Spark Core, RDDs, DataFrames, Catalyst Optimization & Big Data Visualization Techniques
 
 ---
 

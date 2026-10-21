@@ -9,21 +9,17 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-def render_header(student_name: str = "Himanshu Poddar"):
-    """Renders academic project title banner."""
+def render_header():
+    """Renders project title banner."""
     st.markdown(
-        f"""
+        """
         <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
                     padding: 24px; border-radius: 12px; color: white; margin-bottom: 24px;">
             <h1 style="color: white; margin-bottom: 6px; font-size: 28px;">
                 🍽️ Zomato Bangalore Restaurant Analytics
             </h1>
-            <p style="font-size: 15px; margin-bottom: 4px; opacity: 0.95;">
-                <strong>Subject:</strong> Big Data Analytics (FA2 Problem-Based Solving Activity) &nbsp;|&nbsp;
-                <strong>Student:</strong> {student_name}
-            </p>
-            <p style="font-size: 13px; margin-bottom: 0px; opacity: 0.85;">
-                <strong>Core Frameworks:</strong> Apache Spark (Core, RDDs, DataFrames) & Advanced Big Data Visualization
+            <p style="font-size: 15px; margin-bottom: 0px; opacity: 0.95;">
+                Enterprise Big Data Analytics & Interactive Intelligence Platform
             </p>
         </div>
         """,

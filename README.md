@@ -2,25 +2,22 @@
 
 ![Spark Analytics](outputs/charts/01_top_localities_distribution.png)
 
-**Subject:** Big Data Analytics  
-**Activity:** FA2 Problem-Based Solving Activity  
-**Student Name:** Himanshu Poddar  
 **Dataset:** Zomato Bangalore Restaurants Dataset (~547 MB, 51,717 raw listings)  
-**Syllabus Units Covered:**
-- **Unit 3: Apache Spark Frameworks** (Spark Core, RDDs, transformations, actions, DataFrame operations, Catalyst optimizer, caching, partitioning)
-- **Unit 4: Visualization Techniques for Big Data** (Heatmaps, spatial concentration, scatter plots, distributions, comparative charts, interactive dashboards)
+**Key Frameworks & Competencies:**
+- **Distributed Computing with Apache Spark** (Spark Core, RDDs, transformations, actions, DataFrame operations, Catalyst optimizer, caching, partitioning)
+- **Advanced Big Data Visualization** (Heatmaps, spatial concentration, scatter plots, distributions, comparative charts, interactive dashboards)
 
 ---
 
-## 📋 FA2 Evaluation Rubric Mapping Checklist
+## 📋 Technical Implementation & Competencies Matrix
 
-| Rubric Component | Max Marks | Implementation Evidence & File Locations |
-| :--- | :---: | :--- |
-| **Problem identification & understanding** | 1 | Detailed in [REPORT.md](REPORT.md), [data_dictionary.md](data/data_dictionary.md), and [01_dataset_exploration.ipynb](notebooks/01_dataset_exploration.ipynb). Real dataset inspection, missing values, duplicate structure, and data quality constraints identified. |
-| **Apache Spark implementation** | 3 | Real PySpark application implemented in [src/spark_session.py](src/spark_session.py), [src/data_cleaning.py](src/data_cleaning.py), and [src/spark_analysis.py](src/spark_analysis.py). Features Spark Core RDDs (`map`, `filter`, `flatMap`, `reduceByKey`), DataFrame operations, lazy evaluation, in-memory caching (`cache()`), Catalyst execution plans (`explain()`), and partition tuning. |
-| **Data analysis & results** | 2 | Real calculated results across all 13 analytical questions. Output CSVs in [outputs/analysis_results/](outputs/analysis_results/) and code in [03_big_data_analysis.ipynb](notebooks/03_big_data_analysis.ipynb) with strict sample-size thresholds ($\ge 30$). |
-| **Visualization techniques** | 2 | 6 high-resolution static charts (300 DPI) in [outputs/charts/](outputs/charts/) and 5 interactive HTML charts in [outputs/interactive_charts/](outputs/interactive_charts/). Features advanced Locality $\times$ Cuisine Heatmap, Pareto spatial concentration curve, and [04_visualization_analysis.ipynb](notebooks/04_visualization_analysis.ipynb). |
-| **Insights, interpretation & recommendations** | 2 | Actionable strategic recommendations, statistical correlation analysis ($r = +0.33$), and clear distinction between correlation and causation in [REPORT.md](REPORT.md) and [VIVA.md](VIVA.md). |
+| Competency Area | Description | Implementation Evidence & File Locations |
+| :--- | :--- | :--- |
+| **Problem identification & understanding** | Real dataset inspection, missing values, duplicate structure, and data quality constraints identified. | Detailed in [REPORT.md](REPORT.md), [data_dictionary.md](data/data_dictionary.md), and [01_dataset_exploration.ipynb](notebooks/01_dataset_exploration.ipynb). |
+| **Apache Spark implementation** | Real PySpark application featuring Spark Core RDDs (`map`, `filter`, `flatMap`, `reduceByKey`), DataFrame operations, lazy evaluation, in-memory caching (`cache()`), Catalyst execution plans (`explain()`), and partition tuning. | Implemented in [src/spark_session.py](src/spark_session.py), [src/data_cleaning.py](src/data_cleaning.py), and [src/spark_analysis.py](src/spark_analysis.py). |
+| **Data analysis & results** | Calculated metrics across all 13 analytical questions with strict sample-size thresholds ($\ge 30$). | Output CSVs in [outputs/analysis_results/](outputs/analysis_results/) and code in [03_big_data_analysis.ipynb](notebooks/03_big_data_analysis.ipynb). |
+| **Visualization techniques** | 6 high-resolution static charts (300 DPI) and 5 interactive HTML charts featuring advanced Locality $\times$ Cuisine Heatmap, Pareto spatial concentration curve, and bubble plots. | Rendered in [outputs/charts/](outputs/charts/), [outputs/interactive_charts/](outputs/interactive_charts/), and [04_visualization_analysis.ipynb](notebooks/04_visualization_analysis.ipynb). |
+| **Insights & strategic interpretation** | Actionable recommendations, statistical correlation analysis ($r = +0.33$), and clear distinction between correlation and causation. | Detailed in [REPORT.md](REPORT.md) and [VIVA.md](VIVA.md). |
 
 ---
 
@@ -77,8 +74,8 @@ zomato-bangalore-analytics/
 |
 |-- requirements.txt                   <- Reproducible Python dependencies
 |-- README.md                          <- This document
-|-- REPORT.md                          <- Full formal academic report for FA2
-|-- VIVA.md                            <- 20 faculty viva questions & detailed answers
+|-- REPORT.md                          <- Comprehensive analytical report
+|-- VIVA.md                            <- Comprehensive technical viva preparation (20 Q&As)
 |-- ARCHITECTURE.md                    <- System architecture & Mermaid flowcharts
 |-- .gitignore
 ```
