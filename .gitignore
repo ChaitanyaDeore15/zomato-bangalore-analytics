@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and environments
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Spark / Hadoop temporary files
+metastore_db/
+derby.log
+*.spark/
+.sparkStaging/
+
+# Raw large dataset files (exceeds GitHub 100 MB limit, kept locally)
+data/raw/*.csv
+data/raw/*.zip
+data/raw/*.parquet
+
+# Streamlit logs
+.streamlit/

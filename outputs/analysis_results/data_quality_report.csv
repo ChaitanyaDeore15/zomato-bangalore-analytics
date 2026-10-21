@@ -1,0 +1,2 @@
+initial_raw_rows,dropped_missing_identity,duplicate_rows_removed,final_cleaned_rows,valid_ratings_count,null_or_unrated_count,valid_cost_count,null_cost_count,ratings_completeness_pct,cost_completeness_pct
+51717,21,39177,12519,9336,3183,12469,50,74.57,99.6

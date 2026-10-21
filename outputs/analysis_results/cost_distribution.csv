@@ -1,0 +1,5 @@
+cost_tier,restaurant_count,avg_rating,avg_votes
+Economy (₹301 - ₹700),5458,3.57,135.3
+Budget (<= ₹300),5139,3.54,44.2
+Mid-Range (₹701 - ₹1500),1586,3.86,628.5
+Fine Dining (> ₹1500),286,4.15,1026.2
