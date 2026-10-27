@@ -1,102 +1,96 @@
-# Zomato Bangalore Restaurant Analytics Using Apache Spark and Advanced Big Data Visualization
+# Pimpri Chinchwad Education Trust's
+# Pimpri Chinchwad College of Engineering (PCCoE)
+### Sector No. 26, Pradhikaran Nigdi, Pune – 411 044
+### An Autonomous Institute | Affiliated to Savitribai Phule Pune University (SPPU)
+### DEPARTMENT OF INFORMATION TECHNOLOGY | ACADEMIC YEAR 2026-27
 
 ---
 
-**Analytical Project Report**  
-**Dataset:** Zomato Bangalore Restaurants Dataset (~547 MB, 51,717 raw listings)  
-**Core Technologies:** Apache Spark (PySpark), Python 3.10, Matplotlib, Seaborn, Plotly, Streamlit, PyTest  
-**Frameworks Covered:** Apache Spark Core & DataFrames, Big Data Visual Analytics  
+# ZOMATO BANGALORE RESTAURANT ANALYTICS USING APACHE SPARK AND ADVANCED BIG DATA VISUALIZATION
+
+**Project Report for Big Data Analytics (FA2 Activity)**
+
+### Project Group Members:
+- **Arpita Patki** (PRN: `123B1F001`)
+- **Chaitanya Deore** (PRN: `132B1F020`)
+- **Varad Deshmukh** (PRN: `123B1F022`)
+
+**Project Guide:** **Dr. Jaya Dewan**  
+**Core Technologies:** Apache Spark (PySpark 3.5/4.x), Python 3.10, Matplotlib, Seaborn, Plotly, Streamlit, PyTest  
+**Dataset:** Kaggle Zomato Bangalore Restaurants (~547 MB, 51,717 raw observation rows)  
 **Date:** October 2026  
 
 ---
 
-## 1. Abstract
+## 1. Objective
 
-The exponential growth of urban dining ecosystems has created high-volume consumer transaction datasets that exceed traditional single-node analytical capabilities. This report presents an academic and practical implementation of Big Data analytics applied to the **Zomato Bangalore Restaurants** dataset (51,717 raw listings, ~547 MB). Using **Apache Spark (PySpark)** as the distributed computing backbone, we implement Resilient Distributed Datasets (RDDs), Catalyst-optimized DataFrame transformations, and memory caching to clean, normalize, and analyze the market. 
-
-Entity-level deduplication resolved multi-zone listings down to 12,519 unique establishments. Exploratory and bivariate queries revealed that Whitefield, Electronic City, and BTM are Bangalore's densest culinary corridors, while North Indian and Chinese account for the highest market supply. High-dimensional cross-tabulations and an advanced Locality-versus-Cuisine heatmap demonstrate clear spatial preferences. Bivariate analysis established a moderate positive correlation between cost and customer ratings ($r = +0.33$), while table-booking venues achieved significantly higher engagement (4.15 average rating vs. 3.65 for non-booking). An interactive Streamlit dashboard and comprehensive automated test suite validate the reproducibility and academic rigor of the solution.
+To design and implement a Big Data Analytics application that processes 51,717 raw restaurant records (~547 MB) from the Kaggle Zomato Bangalore Restaurants database with Apache Spark (PySpark), resolving multi-city listing redundancy down to 12,519 unique establishments, and to generate actionable insights into restaurant distribution across Bangalore localities, cuisine popularity and rating dynamics, approximate dining cost relationships, the operational impact of online ordering and table booking, and high-dimensional locality-cuisine concentration heatmaps. The results are presented in an interactive Streamlit dashboard.
 
 ---
 
-## 2. Introduction & Background
+## 2. Introduction & Why This is Big Data (5 Vs)
 
-Bangalore, widely recognized as the technology capital of India, features one of the most culturally diverse and commercially dense food service markets in Asia. Online aggregators like Zomato act as digital intermediaries connecting millions of diners with tens of thousands of culinary vendors.
+Bangalore, India’s premier technology hub, features one of the nation's most dense dining ecosystems. Online aggregator platforms like Zomato manage millions of customer interactions across thousands of food venues. The dataset exhibits significant Big Data complexities: unstructured reviews, multi-category cuisine tags, inconsistent rating strings (`'4.1/5'`, `'NEW'`, `'-'`), and duplicate listings across administrative delivery zones. At over half a gigabyte with embedded newlines, single-threaded tools encounter severe memory spikes. We formulate this as a distributed Big Data pipeline using Apache Spark Core and DataFrames to parallelize cleaning, remove 39,177 redundant listings, parse ratings into numeric doubles, and run Catalyst-optimized Spark SQL queries to compute locality distributions, cuisine rankings, and pricing correlations served through an interactive Streamlit dashboard.
 
-Analyzing this ecosystem requires handling unstructured text, missing ratings, multi-category tags, and skewed customer review distributions. In standard data engineering practice, performing iterative exploratory analytics on such multi-gigabyte datasets using single-threaded tools like standard Pandas results in high memory footprints, long computation latencies, and frequent Out-Of-Memory (OOM) failures. This project demonstrates how **Apache Spark** resolves these bottlenecks by distributing computation across partitions and coordinating transformations through lazy evaluation and Catalyst query optimization.
+### 2.1 The 5 Vs of Big Data for this Dataset
 
----
-
-## 3. Problem Identification & Problem Statement
-
-### 3.1 Problem Identification
-Restaurant entrepreneurs, investors, and consumers face significant information asymmetry:
-1. **Commercial Location Overcrowding**: New restaurateurs often establish outlets in heavily saturated zones without understanding localized cuisine deficits.
-2. **Pricing and Quality Confusion**: Diners often assume higher meal pricing directly guarantees superior culinary quality.
-3. **Delivery vs. Dine-in Dynamics**: Food businesses struggle to quantify the actual rating and engagement advantages of enabling digital table reservations and online delivery.
-
-### 3.2 Formal Problem Statement
-To engineer a scalable Big Data pipeline using Apache Spark Core and DataFrames alongside advanced statistical visualization techniques to ingest, sanitize, and analyze the Zomato Bangalore restaurant ecosystem, identifying market concentration, cuisine popularity, price-rating relationships, and data quality dynamics without fabricating unverified spatial coordinates.
+| V | How it applies to this dataset |
+| :--- | :--- |
+| **Volume** | 51,717 raw observation rows (547 MB raw CSV, 17 attributes), parsed and deduplicated to 12,519 unique physical dining establishments. |
+| **Velocity** | A continuous stream of customer orders, live menu additions, dynamic table bookings, and daily user reviews across 93 Bangalore localities. |
+| **Variety** | Multi-format semi-structured data: structured attributes (ratings, cost), multi-value token lists (cuisines, dish liked), binary service flags, and long unstructured review tuples. |
+| **Veracity** | Severe data noise: sentinel string ratings (`'NEW'`, `'-'`), thousand commas in cost (`'1,200'`), and duplicate multi-zone listings. 100.00% physically clean entity retention. |
+| **Value** | Discovers commercial saturation zones (Whitefield, BTM), reveals the table-booking engagement multiplier (6x review volume), and guides restaurateur location strategy. |
 
 ---
 
-## 4. Objectives of the Study
-
-1. **Distributed Ingestion & Preprocessing**: Implement a robust PySpark data ingestion pipeline capable of parsing multi-line quoted CSVs and normalizing dirty tabular data.
-2. **Spark Core & DataFrame Demonstration**: Explicitly implement Unit 3 concepts including RDD transformations (`map`, `filter`, `flatMap`, `reduceByKey`), DataFrame operations, lazy evaluation, and Catalyst optimization plans (`explain()`).
-3. **Market Structure Analysis**: Quantify restaurant concentration across Bangalore localities and determine top cuisine market shares.
-4. **Bivariate Correlation Analysis**: Compute Pearson correlation coefficients between dining expense, customer votes, and ratings while distinguishing correlation from causation.
-5. **Advanced Visualization**: Address Unit 4 concepts by constructing statistical distributions, dual-axis comparative charts, spatial concentration Pareto models, and an advanced 2D Locality-versus-Cuisine heatmap.
-6. **Interactive Presentation & Verification**: Develop a production-grade Streamlit interactive dashboard and an automated test suite verifying data transformations and analytical correctness.
-
----
-
-## 5. Dataset Description & Schema
-
-The dataset analyzed is the official **Zomato Bangalore Restaurants** dataset, comprising 51,717 raw records across 17 attributes.
-
-### 5.1 Dataset Schema & Cleaned Data Types
-
-| Attribute | Raw Type | Cleaned Spark Type | Description & Handling Strategy |
-| :--- | :--- | :--- | :--- |
-| `name` | String | `StringType` | Business trading name; normalized and trimmed. |
-| `online_order` | String | `StringType` | Binary indicator (`Yes`/`No`) of delivery support. |
-| `book_table` | String | `StringType` | Binary indicator (`Yes`/`No`) of reservation support. |
-| `rate` | String | `DoubleType` | Extracted numerical rating from `'4.1/5'`. Unrated entries (`'NEW'`, `'-'`, null) converted to `null` to avoid distorting mean calculations. |
-| `votes` | String/Int | `IntegerType` | Total customer reviews; non-numeric entries cast to 0. |
-| `location` | String | `StringType` | Bangalore neighborhood; standardized for spatial grouping. |
-| `rest_type` | String | `StringType` | Dining format (e.g., Casual Dining, Quick Bites, Cafe). |
-| `cuisines` | String | `StringType` | Comma-separated list of culinary styles; tokenized via `flatMap` / `explode`. |
-| `approx_cost(for two people)`| String | `DoubleType` | Average cost in INR; thousand commas stripped before numeric cast. |
-| `listed_in(type)` | String | `StringType` | Dining category (Buffet, Delivery, Dine-out, Cafes). |
-| `listed_in(city)` | String | `StringType` | Zomato search cluster zone. |
-
-> **Critical Academic Integrity Note on Geospatial Data:**  
-> The raw dataset contains detailed locality and street address strings but **no raw GPS latitude and longitude coordinates**. In accordance with rigorous scientific standards, no synthetic coordinates were fabricated. Geospatial analysis is conducted through locality-level spatial density, concentration percentiles, and commercial cluster profiling.
-
----
-
-## 6. System Architecture & Methodology
+## 3. Dataset Description & Schema
 
 ```
-+-----------------------------------------------------------------------------------+
-|                            DATA INGESTION LAYER                                   |
-|                      data/raw/zomato.csv (51,717 rows)                            |
-+-----------------------------------------------------------------------------------+
-                                         |
-                                         v
-+-----------------------------------------------------------------------------------+
-|                     APACHE SPARK DISTRIBUTED PROCESSING ENGINE                     |
-|  - JVM Modularity Configuration (Java 21 LTS)                                     |
-|  - Schema Standardization & String Trimming                                       |
-|  - Rating Parsing: '4.1/5' -> 4.1 | 'NEW'/'-' -> Null                             |
-|  - Cost Parsing: '1,200' -> 1200.0                                                |
-|  - Physical Entity Deduplication: [name, address, location]                       |
-|    -> Retained: 12,519 Unique Physical Restaurants (39,177 duplicate listings dropped)|
-+-----------------------------------------------------------------------------------+
-                                         |
-                                         v
-+-----------------------------------------------------------------------------------+
-|                         ANALYTICAL COMPUTATION ENGINE                             |
+Jalsa | 942, 21st Main Road, Banashankari | 4.1/5 | 775 | 800 | North Indian, Chinese
+│      │                                    │       │     │     └ comma-separated cuisine tags
+│      │                                    │       │     └ approximate cost for two in INR (₹)
+│      │                                    │       └ total user review / vote count
+│      │                                    └ customer rating out of 5.0 (with /5 suffix)
+│      └ full street address and locality
+└ unique restaurant business trading name
+```
+
+| Metric | Value |
+| :--- | :--- |
+| **Raw observation rows** | 51,717 |
+| **Uncompressed CSV size** | 547.48 MB |
+| **Cleaned unique restaurants** | 12,519 (39,177 duplicate listings removed) |
+| **Represented Bangalore localities** | 93 commercial zones |
+| **Distinct cuisines identified** | 107 culinary categories |
+
+---
+
+## 4. Tools and Technologies
+
+| Tool | Used for |
+| :--- | :--- |
+| **Apache Spark 3.5 / 4.x (PySpark)** | Distributed loading, validation, and multi-core RDD and DataFrame processing on all CPU cores (`local[*]` mode) |
+| **Spark SQL** | Locality aggregations, sample-thresholded cuisine rankings, pivot matrices, and price tier distributions |
+| **Spark Core RDDs** | Low-level distributed processing using `map()`, `filter()`, `flatMap()` (cuisine tokenization), and `reduceByKey()` |
+| **Streamlit + Plotly** | Interactive web dashboard: real-time dynamic filters, KPI metric cards, scatter bubble charts, and 2D heatmaps |
+| **Matplotlib & Seaborn** | High-resolution 300 DPI publication-grade figures, Pareto spatial concentration curves, and correlation heatmaps |
+| **Python, Jupyter, PyTest** | End-to-end processing pipeline, 4 reproducible Jupyter notebooks, and automated 11-test validation suite |
+
+---
+
+## 5. System Architecture & Methodology
+
+The project follows the Big Data Analytics life cycle: **ingest → clean & validate → deduplicate & cache → analyze with Spark Core & SQL → visualize & serve dashboard**. Spark does the heavy processing once; the Streamlit dashboard reads compact precomputed analytical tables, opening instantly with sub-second response times without requiring heavy Spark re-computation at runtime.
+
+![Pipeline Architecture](outputs/charts/report_fig1_pipeline.png)
+
+### 5.1 Multi-Criteria Restaurant Engagement Index (MREI)
+To synthesize operational popularity, dining quality, and digital convenience into a single actionable metric, we define the **Multi-Criteria Restaurant Engagement Index (MREI)**:
+
+$$\text{MREI} = 0.40 \times \left(\frac{\text{Rating}}{5.0}\right) + 0.35 \times \left(\frac{\log_{10}(\text{Votes} + 1)}{\max(\log_{10}(\text{Votes} + 1))}\right) + 0.15 \times \mathbb{I}_{\text{table\_booking}} + 0.10 \times \mathbb{I}_{\text{online\_order}}$$
+
+Where $\mathbb{I} \in \{0, 1\}$ represents service flag availability. This index provides a balanced metric combining customer satisfaction, social proof volume, and operational sophistication.
 |  - Unit 3 RDD Operations: map(), filter(), flatMap(), reduceByKey()               |
 |  - DataFrame Groupings: Locality ranking, Cuisine explode, Sample-threshold rating|
 |  - Pearson Correlation: Cost vs Rating (r = +0.33), Votes vs Rating (r = +0.40)   |
@@ -262,7 +256,10 @@ This project successfully implemented an end-to-end Big Data Analytics workflow 
 
 ## 13. References
 
-1. Zaharia, M., et al. (2016). *Apache Spark: A Unified Engine for Big Data Processing.* Communications of the ACM.
-2. Armbrust, M., et al. (2015). *Spark SQL: Relational Data Processing in Spark.* ACM SIGMOD.
+1. Zaharia, M., et al. (2016). *Apache Spark: A Unified Engine for Big Data Processing.* Communications of the ACM, 59(11), 56-65.
+2. Armbrust, M., et al. (2015). *Spark SQL: Relational Data Processing in Spark.* Proceedings of the 2015 ACM SIGMOD International Conference on Management of Data, 1383-1394.
 3. Few, S. (2009). *Now You See It: Simple Visualization Techniques for Quantitative Analysis.* Analytics Press.
-4. Kaggle Repository: *Zomato Bangalore Restaurants Dataset*.
+4. Kaggle Repository: *Zomato Bangalore Restaurants Dataset*, 2019. Available: `https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants`
+5. Chambers, B., & Zaharia, M. (2018). *Spark: The Definitive Guide: Big Data Processing Made Simple.* O'Reilly Media.
+6. McKinney, W. (2010). *Data Structures for Statistical Computing in Python.* Proceedings of the 9th Python in Science Conference, 51-56.
+7. Streamlit Inc. (2024). *Streamlit Documentation: The Fastest Way to Build Data Apps.* `https://docs.streamlit.io`

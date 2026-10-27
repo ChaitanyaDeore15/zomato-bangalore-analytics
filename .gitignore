@@ -24,3 +24,7 @@ data/raw/*.parquet
 
 # Streamlit logs
 .streamlit/
+
+# Local tools / IDE metadata
+.sf/
+.vscode/
