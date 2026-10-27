@@ -7,6 +7,7 @@ Outputs:
 
 import sys
 import os
+import shutil
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -153,7 +154,7 @@ def generate_docx_report():
         footer = section.footer
         f_p = footer.paragraphs[0]
         f_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        f_run = f_p.add_run("BDA Mini Project · Zomato Bangalore Restaurant Analytics Using Apache Spark")
+        f_run = f_p.add_run("BDA Formative Assessment 2 · Zomato Bangalore Restaurant Analytics Using Apache Spark")
         f_run.font.size = Pt(8.5)
         f_run.font.color.rgb = RGBColor(128, 128, 128)
 
@@ -239,7 +240,7 @@ def generate_docx_report():
         p_img.paragraph_format.space_after = Pt(14)
         p_img.add_run().add_picture(str(logo_path), width=Inches(1.8))
 
-    add_title_p("A Project Report", size=11, bold=False, space_after=3)
+    add_title_p("A Formative Assessment 2 (FA2) Report", size=11, bold=False, space_after=3)
     add_title_p("On", size=11, bold=False, space_after=6)
     add_title_p("ZOMATO BANGALORE RESTAURANT ANALYTICS USING APACHE SPARK AND ADVANCED BIG DATA VISUALIZATION",
                 size=13, bold=True, space_after=24)
@@ -248,7 +249,7 @@ def generate_docx_report():
     add_title_p("Arpita Patki (123B1F001)", size=10.5, bold=False, space_after=3)
     add_title_p("Chaitanya Deore (132B1F020)", size=10.5, bold=False, space_after=3)
     add_title_p("Varad Deshmukh (123B1F022)", size=10.5, bold=False, space_after=14)
-    add_title_p("Guided by: Dr. Jaya Dewan", size=11, bold=True, space_after=0)
+    add_title_p("Guided by: Prof. Madhuri Kethari", size=11, bold=True, space_after=0)
 
     # ----------------------------------------------------
     # PAGE 2: OBJECTIVE, INTRO, 5 Vs, DATASET
@@ -618,8 +619,9 @@ def generate_docx_report():
     for r in refs:
         add_body_p(r, space_after=3)
 
-    docx_path = REPORTS_DIR / "PCCoE_BDA_Mini_Project_Report.docx"
+    docx_path = REPORTS_DIR / "PCCoE_BDA_FA2_Report.docx"
     doc.save(str(docx_path))
+    doc.save(str(REPORTS_DIR / "PCCoE_BDA_Mini_Project_Report.docx"))
     print(f"Word document saved to: {docx_path}")
 
 
@@ -638,7 +640,7 @@ def generate_pdf_report():
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
     from reportlab.pdfgen import canvas
 
-    pdf_output_path = REPORTS_DIR / "PCCoE_BDA_Mini_Project_Report.pdf"
+    pdf_output_path = REPORTS_DIR / "PCCoE_BDA_FA2_Report.pdf"
 
     class NumberedCanvas(canvas.Canvas):
         def __init__(self, *args, **kwargs):
@@ -659,7 +661,7 @@ def generate_pdf_report():
                     self.setFillColor(colors.HexColor("#7F8C8D"))
                     self.drawCentredString(
                         letter[0] / 2.0, 0.45 * inch,
-                        "BDA Mini Project · Zomato Bangalore Restaurant Analytics Using Apache Spark"
+                        "BDA Formative Assessment 2 · Zomato Bangalore Restaurant Analytics Using Apache Spark"
                     )
                     self.restoreState()
                 canvas.Canvas.showPage(self)
@@ -769,7 +771,7 @@ def generate_pdf_report():
         story.append(RLImage(str(logo_path), width=1.8 * inch, height=1.8 * inch))
 
     story.append(Spacer(1, 24))
-    story.append(Paragraph("A Project Report", title_normal_center))
+    story.append(Paragraph("A Formative Assessment 2 (FA2) Report", title_normal_center))
     story.append(Spacer(1, 4))
     story.append(Paragraph("On", title_normal_center))
     story.append(Spacer(1, 10))
@@ -786,7 +788,7 @@ def generate_pdf_report():
     story.append(Spacer(1, 3))
     story.append(Paragraph("Varad Deshmukh (123B1F022)", title_normal_center))
     story.append(Spacer(1, 14))
-    story.append(Paragraph("<b>Guided by: Dr. Jaya Dewan</b>", title_bold_center))
+    story.append(Paragraph("<b>Guided by: Prof. Madhuri Kethari</b>", title_bold_center))
 
     # ----------------------------------------------------
     # PAGE 2: OBJECTIVE, INTRO, 5 Vs, DATASET
@@ -1168,6 +1170,7 @@ def generate_pdf_report():
         story.append(Paragraph(r, body_style))
 
     doc.build(story, canvasmaker=NumberedCanvas)
+    shutil.copyfile(str(pdf_output_path), str(REPORTS_DIR / "PCCoE_BDA_Mini_Project_Report.pdf"))
     print(f"PDF document saved to: {pdf_output_path}")
 
 

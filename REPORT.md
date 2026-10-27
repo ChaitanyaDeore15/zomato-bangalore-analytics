@@ -8,14 +8,14 @@
 
 # ZOMATO BANGALORE RESTAURANT ANALYTICS USING APACHE SPARK AND ADVANCED BIG DATA VISUALIZATION
 
-**Project Report for Big Data Analytics (FA2 Activity)**
+**Formative Assessment 2 (FA2) Report for Big Data Analytics**
 
 ### Project Group Members:
 - **Arpita Patki** (PRN: `123B1F001`)
 - **Chaitanya Deore** (PRN: `132B1F020`)
 - **Varad Deshmukh** (PRN: `123B1F022`)
 
-**Project Guide:** **Dr. Jaya Dewan**  
+**Project Guide:** **Prof. Madhuri Kethari**  
 **Core Technologies:** Apache Spark (PySpark 3.5/4.x), Python 3.10, Matplotlib, Seaborn, Plotly, Streamlit, PyTest  
 **Dataset:** Kaggle Zomato Bangalore Restaurants (~547 MB, 51,717 raw observation rows)  
 **Date:** October 2026  
